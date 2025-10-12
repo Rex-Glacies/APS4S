@@ -1,5 +1,5 @@
 package doa;
 
-public class Doa {
+public interface  Doa {
 
 }
