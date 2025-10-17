@@ -9,7 +9,7 @@ import java.util.List;
 public interface  InterfaceDoa {
 
     //Clientes
-    public void addCliente(Clientes c);
+    public void addCliente(Clientes cl);
     public List<Clientes> getAllClientes();
     public List<Clientes> getClientes(String key);
     public void deletCliente(int cod);
