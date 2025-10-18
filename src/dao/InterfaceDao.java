@@ -12,7 +12,7 @@ public interface  InterfaceDao {
     public void addCliente(Clientes cl);
     public List<Clientes> getAllClientes();
     public List<Clientes> getClientes(String key);
-    public void deletCliente(int cod);
+
 
     //Funcionarios
     public void addFuncionario(Funcionarios f);

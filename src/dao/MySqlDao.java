@@ -104,24 +104,7 @@ public class MySqlDao implements InterfaceDao {
         return clinte;
     }
 
-    @Override
-    public void deletCliente(int cod) {
-        final String query = "DELETE FROM cliente WHERE Cod=?;";
 
-        try (Connection c = DriverManager.getConnection(URL,USER,PASS)) {
-
-            PreparedStatement pstm = c.prepareStatement(query);
-
-            pstm.setInt(1, cod);
-
-            pstm.executeUpdate();
-
-            System.out.println("Cliente excluido com sucesso!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     //Parte do Funcionario
@@ -207,7 +190,27 @@ public class MySqlDao implements InterfaceDao {
 
     @Override
     public void deletFuncionario(int cod) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final String query = "DELETE FROM funcionario WHERE Cod=?;";
+
+        String codS = String.valueOf(cod);
+
+        if (!getFuncionario(codS).isEmpty()) {
+            try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+            
+                PreparedStatement pstm = c.prepareStatement(query);
+
+                pstm.setInt(1, cod);
+                pstm.executeUpdate();
+
+                System.err.println("Funcionario deletado com sucesso");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Funcionario não encontrado");
+        }
+
     }
 
 
@@ -292,8 +295,28 @@ public class MySqlDao implements InterfaceDao {
 
     @Override
     public void deletProduto(String cod) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final String query = "DELETE FROM produto WHERE Cod=?;";
+
+
+        if (!getProduto(cod).isEmpty()) {
+            try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+            
+                PreparedStatement pstm = c.prepareStatement(query);
+
+                pstm.setString(1, cod);
+                pstm.executeUpdate();
+
+                System.err.println("Produto deletado com sucesso");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Produto não encontrado");
+        }
+        
     }
+    
 
 
     //Parte do pedido
@@ -379,7 +402,27 @@ public class MySqlDao implements InterfaceDao {
 
     @Override
     public void deletPedido(int cod) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final String query = "DELETE FROM pedido WHERE N_Pedido= ?;";
+
+        if (!getPedido(cod).isEmpty()) {
+
+            try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+            
+                PreparedStatement pstm = c.prepareStatement(query);
+
+                pstm.setInt(1, cod);
+                pstm.executeUpdate();
+
+                System.err.println("Pedido deletado com sucesso");
+
+            } catch (Exception e) {
+            e.printStackTrace();
+            }
+        } else {
+            System.out.println("Pedido não encontrado");
+        }
+
+
     }
     
     
