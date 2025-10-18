@@ -1,4 +1,4 @@
-package doa;
+package dao;
 
 import entidades.Clientes;
 import entidades.Funcionarios;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MySqlDoa implements InterfaceDoa {
+public class MySqlDao implements InterfaceDao {
 
     final static private String USER = "root";
     final static private String PASS = "";
@@ -71,12 +71,56 @@ public class MySqlDoa implements InterfaceDoa {
 
     @Override
     public List<Clientes> getClientes(String key) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<Clientes> clinte = new ArrayList<>();
+
+        final String query = "SELECT * FROM cliente WHERE Cod=? OR Nome LIKE ?;";
+
+        try (Connection c = DriverManager.getConnection(URL,USER,PASS)) {
+
+            PreparedStatement pstm = c.prepareStatement(query);
+
+            int cd;
+            try {
+                cd = Integer.parseInt(key);
+            } catch (Exception e) {
+                cd =0;
+            }
+
+            pstm.setInt(1, cd);
+            pstm.setString(2, "%" + key + "%");
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int cod = rs.getInt("Cod");
+                String nome = rs.getString("Nome");
+                Clientes cliente = new Clientes(cod, nome);
+                clinte.add(cliente);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return clinte;
     }
 
     @Override
     public void deletCliente(int cod) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final String query = "DELETE FROM cliente WHERE Cod=?;";
+
+        try (Connection c = DriverManager.getConnection(URL,USER,PASS)) {
+
+            PreparedStatement pstm = c.prepareStatement(query);
+
+            pstm.setInt(1, cod);
+
+            pstm.executeUpdate();
+
+            System.out.println("Cliente excluido com sucesso!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -90,7 +134,7 @@ public class MySqlDoa implements InterfaceDoa {
             PreparedStatement psmt = c.prepareStatement(query);
 
             psmt.setInt(1, f.getCodigo());
-            psmt.setString(2, f.toString());
+            psmt.setString(2, f.getNome());
 
             psmt.executeUpdate();
 
@@ -128,7 +172,37 @@ public class MySqlDoa implements InterfaceDoa {
 
     @Override
     public List<Funcionarios> getFuncionario(String key) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<Funcionarios> funcionario = new ArrayList<>();
+
+        final String query = "SELECT * FROM funcionario WHERE Cod=? OR Nome LIKE ?;";
+
+        try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+            
+            PreparedStatement pstm = c.prepareStatement(query);
+
+            int cd;
+            try {
+                cd = Integer.parseInt(key);
+            } catch (Exception e) {
+                cd =0;
+            }
+
+            pstm.setInt(1, cd);
+            pstm.setString(2, "%" + key + "%");
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int cod = rs.getInt("Cod");
+                String nome = rs.getString("Nome");
+                Funcionarios fun = new Funcionarios(cod, nome);
+                funcionario.add(fun);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return funcionario;
     }
 
     @Override
@@ -189,7 +263,31 @@ public class MySqlDoa implements InterfaceDoa {
 
     @Override
     public List<Produtos> getProduto(String key) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<Produtos> produto = new ArrayList<>();
+
+        final String query = "SELECT * FROM produto WHERE Cod=? OR Nome LIKE ? ";
+
+        try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+            PreparedStatement pstm = c.prepareStatement(query);
+
+            pstm.setString(1, key);
+            pstm.setString(2, "%" + key + "%");
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                String cod = rs.getString("Cod");
+                String nome = rs.getString("Nome");
+                double preco = rs.getDouble("Preco");
+                int estoque = rs.getInt("Estoque");
+                Produtos prod = new Produtos(cod, nome, preco, estoque);
+                produto.add(prod);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return produto;
     }
 
     @Override
@@ -253,7 +351,30 @@ public class MySqlDoa implements InterfaceDoa {
 
     @Override
     public List<Pedidos> getPedido(int key) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<Pedidos> pedido = new ArrayList<>();
+        final String query = "SELECT * FROM pedido WHERE N_Pedido= ?;";
+
+        try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+            
+            PreparedStatement pstm = c.prepareStatement(query);
+
+            pstm.setInt(1, key);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int n_pedido = rs.getInt("N_Pedido");
+                String cod_prod = rs.getString("Cod_Prod_FK");
+                int cod_fun = rs.getInt("Cod_Fun_FK");
+                int cod_clien = rs.getInt("Cod_Clien_FK");
+                int qntd_prod = rs.getInt("Qtd_Prod");
+                Pedidos p = new Pedidos(n_pedido, cod_prod, cod_fun, cod_clien, qntd_prod);
+                pedido.add(p);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pedido;
     }
 
     @Override

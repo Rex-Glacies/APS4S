@@ -1,4 +1,4 @@
-package doa;
+package dao;
 
 import entidades.Clientes;
 import entidades.Funcionarios;
@@ -6,7 +6,7 @@ import entidades.Pedidos;
 import entidades.Produtos;
 import java.util.List;
 
-public interface  InterfaceDoa {
+public interface  InterfaceDao {
 
     //Clientes
     public void addCliente(Clientes cl);
