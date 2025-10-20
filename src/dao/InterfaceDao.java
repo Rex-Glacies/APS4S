@@ -18,13 +18,13 @@ public interface  InterfaceDao {
     public void addFuncionario(Funcionarios f);
     public List<Funcionarios> getAllFuncionarios();
     public List<Funcionarios> getFuncionario(String key);
-    public void deletFuncionario(int cod);
+   
 
     //Produtos
     public void addProduto(Produtos p);
     public List<Produtos> getAllProdutos();
     public List<Produtos> getProduto(String key);
-    public void deletProduto(String cod);
+    
 
     //Pedidos
     public void addPedido(Pedidos ped);

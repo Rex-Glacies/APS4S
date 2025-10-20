@@ -188,30 +188,6 @@ public class MySqlDao implements InterfaceDao {
         return funcionario;
     }
 
-    @Override
-    public void deletFuncionario(int cod) {
-        final String query = "DELETE FROM funcionario WHERE Cod=?;";
-
-        String codS = String.valueOf(cod);
-
-        if (!getFuncionario(codS).isEmpty()) {
-            try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
-            
-                PreparedStatement pstm = c.prepareStatement(query);
-
-                pstm.setInt(1, cod);
-                pstm.executeUpdate();
-
-                System.err.println("Funcionario deletado com sucesso");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Funcionario não encontrado");
-        }
-
-    }
 
 
     //Parte do produto
@@ -292,30 +268,8 @@ public class MySqlDao implements InterfaceDao {
 
         return produto;
     }
-
-    @Override
-    public void deletProduto(String cod) {
-        final String query = "DELETE FROM produto WHERE Cod=?;";
-
-
-        if (!getProduto(cod).isEmpty()) {
-            try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
-            
-                PreparedStatement pstm = c.prepareStatement(query);
-
-                pstm.setString(1, cod);
-                pstm.executeUpdate();
-
-                System.err.println("Produto deletado com sucesso");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Produto não encontrado");
-        }
         
-    }
+   
     
 
 
