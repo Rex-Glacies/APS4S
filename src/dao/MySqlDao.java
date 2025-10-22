@@ -23,15 +23,14 @@ public class MySqlDao implements InterfaceDao {
 
     //Parte do Cliente
     @Override
-    public void addCliente(Clientes cl) {
-        final String query = "INSERT INTO cliente(Cod,Nome) VALUES (?,?);";
+    public void addCliente(String cl) {
+        final String query = "INSERT INTO cliente(Nome) VALUES (?);";
 
         try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
 
             PreparedStatement pstm = c.prepareStatement(query);
 
-            pstm.setInt(1, cl.getC_codigo());
-            pstm.setString(2, cl.getNome());
+            pstm.setString(1, cl);
 
             pstm.executeUpdate();
 
@@ -110,7 +109,7 @@ public class MySqlDao implements InterfaceDao {
     //Parte do Funcionario
     @Override
     public void addFuncionario(Funcionarios f) {
-        final String query = "INSERT INTO funcionario(Cod,Nome) VALUES (?,?);";
+        final String query = "INSERT INTO funcionario(Nome) VALUES (?);";
 
         try (Connection c = DriverManager.getConnection(URL, USER,PASS)){
             

@@ -62,11 +62,7 @@ public class PainelMain extends JFrame {
         //Delete telas
         JMenu deletarMenu = new JMenu("Deletar");
         deletarMenu.setForeground(Color.WHITE);
-        JMenuItem delCliente = new JMenuItem("Deletar Cliente");
-        JMenuItem delFuncionario = new JMenuItem("Deletar Funcionário");
         JMenuItem delPedido = new JMenuItem("Deletar Pedido");
-        deletarMenu.add(delCliente);
-        deletarMenu.add(delFuncionario);
         deletarMenu.add(delPedido);
 
         //Adicionar o menu na ordem correta
@@ -155,14 +151,6 @@ public class PainelMain extends JFrame {
 
         verProduto.addActionListener((ActionEvent e) -> {
             trocarTela(new TelaVerProdutos());
-        });
-
-        delCliente.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaDeletarCliente());
-        });
-
-        delFuncionario.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaDeletarFuncionario());
         });
 
         delPedido.addActionListener((ActionEvent e) -> {

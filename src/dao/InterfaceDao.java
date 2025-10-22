@@ -9,7 +9,7 @@ import java.util.List;
 public interface  InterfaceDao {
 
     //Clientes
-    public void addCliente(Clientes cl);
+    public void addCliente(String cl);
     public List<Clientes> getAllClientes();
     public List<Clientes> getClientes(String key);
 
