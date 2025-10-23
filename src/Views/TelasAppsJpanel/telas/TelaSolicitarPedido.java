@@ -1,13 +1,16 @@
 package Views.TelasAppsJpanel.telas;
 
+import Views.InterfaceViews.InterfaceCadPedidos;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class TelaSolicitarPedido extends JPanel {
-    private JTextField campoCliente, campoProduto, campoQuantidade;
-    private JTextArea areaObservacao;
+public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
+    private JTextField campoCliente, campoProduto, campoQuantidade, campoFuncionario;
     private ArrayList<String> pedidos;
+    private JButton btnEnviar;
+    private JButton btnLimpar;
 
     public TelaSolicitarPedido() {
         setLayout(new BorderLayout(10, 10));
@@ -27,38 +30,67 @@ public class TelaSolicitarPedido extends JPanel {
         campoCliente = new JTextField();
         campoProduto = new JTextField();
         campoQuantidade = new JTextField();
-        areaObservacao = new JTextArea(3, 20);
-        JScrollPane scrollObs = new JScrollPane(areaObservacao);
+        campoFuncionario = new JTextField();
 
-        formPanel.add(new JLabel("Nome do Cliente:"));
-        formPanel.add(campoCliente);
-
-        formPanel.add(new JLabel("Produto:"));
+        formPanel.add(new JLabel("Codigo do Produto:"));
         formPanel.add(campoProduto);
+
+        formPanel.add(new JLabel("Codido do Funcionario:"));
+        formPanel.add(campoFuncionario);
+
+        formPanel.add(new JLabel("Codigo do Cliente:"));
+        formPanel.add(campoCliente);
 
         formPanel.add(new JLabel("Quantidade:"));
         formPanel.add(campoQuantidade);
-
-        formPanel.add(new JLabel("Observações:"));
-        formPanel.add(scrollObs);
 
         add(formPanel, BorderLayout.CENTER);
 
         // Botões
         JPanel botoes = new JPanel();
         botoes.setBackground(Color.WHITE);
-        JButton btnEnviar = new JButton("Enviar Pedido");
+        btnEnviar = new JButton("Enviar Pedido");
         JButton btnLimpar = new JButton("Limpar");
         botoes.add(btnEnviar);
         botoes.add(btnLimpar);
 
         add(botoes, BorderLayout.SOUTH);
 
-        // Ações
-        btnEnviar.addActionListener(e -> enviarPedido());
+        
         btnLimpar.addActionListener(e -> limparCampos());
     }
 
+
+    @Override
+    public int codCliente() {
+        return Integer.parseInt(campoCliente.getText());
+    }
+
+    @Override
+    public int codFunc() {
+        return Integer.parseInt(campoFuncionario.getText());
+    }
+
+    @Override
+    public String codProd() {
+        return campoProduto.getText();
+    }
+
+    @Override
+    public int quant() {
+        return Integer.parseInt(campoQuantidade.getText());
+    }
+
+    
+    @Override
+    public void AddenviarPedido(ActionListener ln) {
+        btnEnviar.addActionListener(ln);  
+        limparCampos();
+    }
+
+
+
+    /* 
     private void enviarPedido() {
         String cliente = campoCliente.getText().trim();
         String produto = campoProduto.getText().trim();
@@ -76,11 +108,12 @@ public class TelaSolicitarPedido extends JPanel {
         JOptionPane.showMessageDialog(this, "Pedido solicitado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         limparCampos();
     }
+    */
 
     private void limparCampos() {
         campoCliente.setText("");
         campoProduto.setText("");
         campoQuantidade.setText("");
-        areaObservacao.setText("");
+        campoFuncionario.setText("");
     }
 }

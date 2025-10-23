@@ -108,15 +108,14 @@ public class MySqlDao implements InterfaceDao {
 
     //Parte do Funcionario
     @Override
-    public void addFuncionario(Funcionarios f) {
+    public void addFuncionario(String f) {
         final String query = "INSERT INTO funcionario(Nome) VALUES (?);";
 
         try (Connection c = DriverManager.getConnection(URL, USER,PASS)){
             
             PreparedStatement psmt = c.prepareStatement(query);
 
-            psmt.setInt(1, f.getCodigo());
-            psmt.setString(2, f.getNome());
+            psmt.setString(1, f);
 
             psmt.executeUpdate();
 
@@ -274,25 +273,26 @@ public class MySqlDao implements InterfaceDao {
 
     //Parte do pedido
     @Override
-    public void addPedido(Pedidos ped) {
-        final String query = "INSERT INTO pedido(N_Pedido,Cod_Prod_FK,Cod_Fun_FK,Cod_Clien_FK,Qtd_Prod) VALUES (?,?,?,?,?);";
+    public void addPedido(String codProd, int codFun, int codClient, int quant) {
+        final String query = "INSERT INTO pedido(Cod_Prod_FK,Cod_Fun_FK,Cod_Clien_FK,Qtd_Prod) VALUES (?,?,?,?);";
 
         try (Connection c = DriverManager.getConnection(URL, USER,PASS)){
             
             PreparedStatement psmt = c.prepareStatement(query);
 
-            psmt.setInt(1, ped.getNum_pedido());
-            psmt.setString(2, ped.getCod_prod());
-            psmt.setInt(3, ped.getCod_fun());
-            psmt.setInt(4, ped.getCod_clien());
-            psmt.setInt(5, ped.getQuantidade_prod());
+            psmt.setString(1, codProd);
+            psmt.setInt(2, codFun);
+            psmt.setInt(3, codClient);
+            psmt.setInt(4, quant);
 
             psmt.executeUpdate();
 
-            System.out.println(" Pedido adicionado com sucesso!");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        
     }
 
     @Override

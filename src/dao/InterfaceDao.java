@@ -15,7 +15,7 @@ public interface  InterfaceDao {
 
 
     //Funcionarios
-    public void addFuncionario(Funcionarios f);
+    public void addFuncionario(String f);
     public List<Funcionarios> getAllFuncionarios();
     public List<Funcionarios> getFuncionario(String key);
    
@@ -27,7 +27,7 @@ public interface  InterfaceDao {
     
 
     //Pedidos
-    public void addPedido(Pedidos ped);
+    public void addPedido(String codProd, int codFun, int codClient, int quant);
     public List<Pedidos> getAllPedidos();
     public List<Pedidos> getPedido(int key);
     public void deletPedido(int cod);

@@ -1,8 +1,10 @@
 package Views.InterfaceViews;
 
+import java.awt.event.ActionListener;
+
 public interface InterfaceCadPedidos {
     
-    public void enviarPedido();
+    public void AddenviarPedido(ActionListener ln);
 
     //Get do usuario
     public int codCliente();

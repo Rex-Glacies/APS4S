@@ -1,5 +1,7 @@
 package Views.TelasAppsJpanel.telas;
 
+import Controller.ControllerCriarPedido;
+import dao.MySqlDao;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -11,6 +13,8 @@ public class PainelMain extends JFrame {
     private final JPanel conteudoPainel;
     private boolean MaximizarTela = false;
     private Point ClickPrincipal;
+
+    private ControllerCriarPedido controllerCPedido = new ControllerCriarPedido(new MySqlDao(), new TelaSolicitarPedido());
 
     public PainelMain() {
 
@@ -158,7 +162,7 @@ public class PainelMain extends JFrame {
         });
 
         solicitarPedido.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaSolicitarPedido());
+            trocarTela(controllerCPedido.getView());
         });
 
         historicoPedido.addActionListener((ActionEvent e) -> {
