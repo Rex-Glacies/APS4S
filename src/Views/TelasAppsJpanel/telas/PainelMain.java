@@ -1,6 +1,7 @@
 package Views.TelasAppsJpanel.telas;
 
 import Controller.ControllerCriarPedido;
+import Controller.ControllerSelectPedido;
 import dao.MySqlDao;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +16,7 @@ public class PainelMain extends JFrame {
     private Point ClickPrincipal;
 
     private ControllerCriarPedido controllerCPedido = new ControllerCriarPedido(new MySqlDao(), new TelaSolicitarPedido());
+    private ControllerSelectPedido contrrollerSpedido = new ControllerSelectPedido(new MySqlDao(), new TelaHistoricoPedidos());
 
     public PainelMain() {
 
@@ -166,7 +168,7 @@ public class PainelMain extends JFrame {
         });
 
         historicoPedido.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaHistoricoPedidos());
+            trocarTela(contrrollerSpedido.getView());
         });
 
         setVisible(true);

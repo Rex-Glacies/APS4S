@@ -1,15 +1,23 @@
 package Views.TelasAppsJpanel.telas;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaHistoricoPedidos extends JPanel {
+import Views.InterfaceViews.InterfaceSelect;
+import entidades.Pedidos;
+
+public class TelaHistoricoPedidos extends JPanel implements InterfaceSelect<Pedidos> {
     private JTable tabela;
     private DefaultTableModel modelo;
     private JPanel areaDeBusca;
     private JLabel label;
     private JTextField campoBusca;
+    private JButton atualizar;
+    
 
     public TelaHistoricoPedidos() {
         setLayout(new BorderLayout(10, 10));
@@ -43,7 +51,7 @@ public class TelaHistoricoPedidos extends JPanel {
         
 
         // Colunas
-        String[] colunas = {"ID", "Cliente", "Produto", "Quantidade"};
+        String[] colunas = {"Num.Pedido", "Cod.Fun", "Cod.Cliente", "Cod.Produto", "Quantidade"};
         modelo = new DefaultTableModel(colunas, 0);
         tabela = new JTable(modelo) {
             @Override public boolean isCellEditable(int row, int column) {
@@ -58,19 +66,50 @@ public class TelaHistoricoPedidos extends JPanel {
         // Botões
         JPanel botoes = new JPanel();
         botoes.setBackground(Color.WHITE);
-        JButton atualizar = new JButton("Atualizar Lista");
+        atualizar = new JButton("Atualizar Lista");
         botoes.add(atualizar);
         add(botoes, BorderLayout.SOUTH);
 
         // Dados simulados
-        atualizar.addActionListener(e -> carregarPedidos());
+        //atualizar.addActionListener(e -> carregarPedidos());
     }
 
-    private void carregarPedidos() {
-        modelo.setRowCount(0); // limpa
-        modelo.addRow(new Object[]{"001", "João Vitor", "Mouse Gamer", "2", "Entregue"});
-        modelo.addRow(new Object[]{"002", "Maria Silva", "Teclado", "1", "Em preparo"});
-        modelo.addRow(new Object[]{"003", "Lucas Alves", "Monitor 24\"", "3", "Aguardando pagamento"});
-        modelo.addRow(new Object[]{"004", "Beatriz Lima", "Notebook", "1", "Enviado"});
-    }
+
+
+	@Override
+	public String getBusca() {
+		return campoBusca.getText();
+	}
+
+	@Override
+	public void mostrarTodos(List<Pedidos> lista) {
+		preencherTabela(lista);
+	}
+	
+	public void preencherTabela(List<Pedidos> pd) {
+		modelo.setRowCount(0);
+		for(Pedidos p : pd) {
+			Object [] row = new Object[5];
+			row[0] = p.getNum_pedido();
+			row[1] = p.getCod_fun();
+			row[2] = p.getCod_clien();
+			row[3] = p.getCod_prod();
+			row[4] = p.getQuantidade_prod();
+			
+			modelo.addRow(row);
+		}
+	}
+
+	@Override
+	public void addListenerBusca(ActionListener al) {
+		campoBusca.addActionListener(al);
+	}
+
+
+
+	@Override
+	public void addListarTodos(ActionListener al) {
+		atualizar.addActionListener(al);
+		
+	}
 }
