@@ -1,15 +1,20 @@
 package Views.TelasAppsJpanel.telas;
 
+import Views.InterfaceViews.InterfaceSelect;
+import entidades.Produtos;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaVerProdutos extends JPanel {
+public class TelaVerProdutos extends JPanel implements InterfaceSelect<Produtos> {
     private JTable tabela;
     private DefaultTableModel modelo;
     private JPanel areaDeBusca;
     private JLabel label;
     private JTextField campoBusca;
+    private JButton atualizar;
 
     public TelaVerProdutos() {
         setLayout(new BorderLayout(10, 10));
@@ -58,8 +63,42 @@ public class TelaVerProdutos extends JPanel {
         // Botões
         JPanel botoes = new JPanel();
         botoes.setBackground(Color.WHITE);
-        JButton atualizar = new JButton("Atualizar Lista");
+        atualizar = new JButton("Atualizar Lista");
         botoes.add(atualizar);
         add(botoes, BorderLayout.SOUTH);
+    }
+
+    @Override
+    public String getBusca() {
+        return campoBusca.getText();
+    }
+
+    @Override
+    public void mostrarTodos(List<Produtos> lista) {
+        preencherTabela(lista);
+    }
+
+    @Override
+    public void preencherTabela(List<Produtos> a) {
+        modelo.setRowCount(0);
+        for (Produtos p : a) {
+            Object[] row = new Object[4];
+            row[0] = p.getP_codigo();
+            row[1] = p.getP_nome();
+            row[2] = p.getP_preco();
+            row[3] = p.getP_estoque();
+
+            modelo.addRow(row);
+        }
+    }
+
+    @Override
+    public void addListenerBusca(ActionListener al) {
+        campoBusca.addActionListener(al);
+    }
+
+    @Override
+    public void addListarTodos(ActionListener al) {
+        atualizar.addActionListener(al);
     }
 }

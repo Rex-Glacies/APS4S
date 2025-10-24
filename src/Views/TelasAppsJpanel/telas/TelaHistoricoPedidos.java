@@ -1,14 +1,12 @@
 package Views.TelasAppsJpanel.telas;
 
+import Views.InterfaceViews.InterfaceSelect;
+import entidades.Pedidos;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import Views.InterfaceViews.InterfaceSelect;
-import entidades.Pedidos;
 
 public class TelaHistoricoPedidos extends JPanel implements InterfaceSelect<Pedidos> {
     private JTable tabela;
@@ -86,6 +84,7 @@ public class TelaHistoricoPedidos extends JPanel implements InterfaceSelect<Pedi
 		preencherTabela(lista);
 	}
 	
+    @Override
 	public void preencherTabela(List<Pedidos> pd) {
 		modelo.setRowCount(0);
 		for(Pedidos p : pd) {

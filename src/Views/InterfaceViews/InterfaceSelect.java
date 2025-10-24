@@ -10,7 +10,8 @@ public interface InterfaceSelect<T> {
 	
 	//Mostrar para usuario
 	public void mostrarTodos(List<T> lista);
-
+	public void preencherTabela(List<T> a);
+	
 	//lister das acoes
 	public void addListenerBusca(ActionListener al);
 	public void addListarTodos(ActionListener al);

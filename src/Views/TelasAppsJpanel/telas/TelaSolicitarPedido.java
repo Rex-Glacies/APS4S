@@ -90,25 +90,7 @@ public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
 
 
 
-    /* 
-    private void enviarPedido() {
-        String cliente = campoCliente.getText().trim();
-        String produto = campoProduto.getText().trim();
-        String quantidade = campoQuantidade.getText().trim();
-        String observacao = areaObservacao.getText().trim();
 
-        if (cliente.isEmpty() || produto.isEmpty() || quantidade.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String pedido = String.format("Cliente: %s | Produto: %s | Qtd: %s | Obs: %s", cliente, produto, quantidade, observacao);
-        pedidos.add(pedido);
-
-        JOptionPane.showMessageDialog(this, "Pedido solicitado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        limparCampos();
-    }
-    */
 
     private void limparCampos() {
         campoCliente.setText("");

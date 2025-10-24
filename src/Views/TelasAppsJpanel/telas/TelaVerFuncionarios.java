@@ -1,16 +1,21 @@
 
 package Views.TelasAppsJpanel.telas;
 
+import Views.InterfaceViews.InterfaceSelect;
+import entidades.Funcionarios;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaVerFuncionarios extends JPanel {
+public class TelaVerFuncionarios extends JPanel implements InterfaceSelect<Funcionarios> {
     private JTable tabela;
     private DefaultTableModel modelo;
     private JPanel areaDeBusca;
     private JLabel label;
     private JTextField campoBusca;
+    private JButton atualizar;
 
     public TelaVerFuncionarios() {
         setLayout(new BorderLayout(10, 10));
@@ -59,9 +64,43 @@ public class TelaVerFuncionarios extends JPanel {
         // Botões
         JPanel botoes = new JPanel();
         botoes.setBackground(Color.WHITE);
-        JButton atualizar = new JButton("Atualizar Lista");
+        atualizar = new JButton("Atualizar Lista");
         botoes.add(atualizar);
         add(botoes, BorderLayout.SOUTH);
     }
+
+    @Override
+    public String getBusca() {
+        return campoBusca.getText();
+    }
+
+    @Override
+    public void mostrarTodos(List<Funcionarios> lista) {
+        preencherTabela(lista);
+    }
+
+    @Override
+    public void preencherTabela(List<Funcionarios> a) {
+        modelo.setRowCount(0);
+        for (Funcionarios f : a) {
+            Object[] row = new Object[2];
+            row[0] = f.getCodigo();
+            row[1] = f.getNome();
+
+            modelo.addRow(row);
+        }
+    }
+
+    @Override
+    public void addListenerBusca(ActionListener al) {
+        campoBusca.addActionListener(al);
+    }
+
+    @Override
+    public void addListarTodos(ActionListener al) {
+        atualizar.addActionListener(al);
+    }
+
+
 }
 

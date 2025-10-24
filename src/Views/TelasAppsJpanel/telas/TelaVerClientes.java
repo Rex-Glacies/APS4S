@@ -1,19 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Views.TelasAppsJpanel.telas;
 
+import Views.InterfaceViews.InterfaceSelect;
+import entidades.Clientes;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaVerClientes extends JPanel {
+public class TelaVerClientes extends JPanel implements InterfaceSelect<Clientes> {
     private JTable tabela;
     private DefaultTableModel modelo;
     private JPanel areaDeBusca;
     private JLabel label;
     private JTextField campoBusca;
+    private JButton atualizar;
 
     public TelaVerClientes() {
         setLayout(new BorderLayout(10, 10));
@@ -62,8 +63,41 @@ public class TelaVerClientes extends JPanel {
         // Botões
         JPanel botoes = new JPanel();
         botoes.setBackground(Color.WHITE);
-        JButton atualizar = new JButton("Atualizar Lista");
+        atualizar = new JButton("Atualizar Lista");
         botoes.add(atualizar);
         add(botoes, BorderLayout.SOUTH);
     }
+
+    @Override
+    public String getBusca() {
+        return campoBusca.getText();
+    }
+
+    @Override
+    public void mostrarTodos(List<Clientes> lista) {
+        preencherTabela(lista);
+    }
+
+    @Override
+    public void preencherTabela(List<Clientes> a) {
+        modelo.setRowCount(0);
+        for (Clientes c : a) {
+            Object[] row = new Object[2];
+            row[0] = c.getC_codigo();
+            row[1] = c.getNome();
+
+            modelo.addRow(row);
+        }
+    }
+
+    @Override
+    public void addListenerBusca(ActionListener al) {
+        campoBusca.addActionListener(al);
+    }
+
+    @Override
+    public void addListarTodos(ActionListener al) {
+        atualizar.addActionListener(al);
+    }
+
 }
