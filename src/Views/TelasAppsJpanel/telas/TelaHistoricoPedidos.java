@@ -102,8 +102,6 @@ public class TelaHistoricoPedidos extends JPanel implements InterfaceSelect<Pedi
 		campoBusca.addActionListener(al);
 	}
 
-
-
 	@Override
 	public void addListarTodos(ActionListener al) {
 		atualizar.addActionListener(al);
