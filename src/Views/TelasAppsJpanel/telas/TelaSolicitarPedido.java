@@ -91,8 +91,8 @@ public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
 
 
 
-
-    private void limparCampos() {
+    @Override
+    public void limparCampos() {
         campoCliente.setText("");
         campoProduto.setText("");
         campoQuantidade.setText("");

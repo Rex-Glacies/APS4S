@@ -29,9 +29,11 @@ public class ControllerSelectCliente {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String key = view.getBusca();
+  
+        	String key = view.getBusca();
             List<Clientes> client = model.getClientes(key);
             view.mostrarTodos(client);
+
         }
 
     }

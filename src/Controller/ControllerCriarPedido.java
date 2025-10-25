@@ -37,6 +37,8 @@ public class ControllerCriarPedido {
                 model.addPedido(codProd, codFun, codClien, quant);
 
                 JOptionPane.showMessageDialog(null,"Pedido solicitado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                
+                view.limparCampos();
         
             } catch (NumberFormatException  ex) {
                 JOptionPane.showMessageDialog(null, "Campos numéricos inválidos ou vazios!","Erro",JOptionPane.ERROR_MESSAGE );

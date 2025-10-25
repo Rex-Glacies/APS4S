@@ -11,4 +11,6 @@ public interface InterfaceCadPedidos {
     public int codFunc();
     public String codProd();
     public int quant();
+    public void limparCampos();
+    
 }
