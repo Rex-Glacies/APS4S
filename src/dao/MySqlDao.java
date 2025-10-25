@@ -34,9 +34,6 @@ public class MySqlDao implements InterfaceDao {
 
             pstm.executeUpdate();
 
-            System.out.println("Cliente adicionado com sucesso!");
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,7 +116,6 @@ public class MySqlDao implements InterfaceDao {
 
             psmt.executeUpdate();
 
-            System.out.println("Funcionario adicionado com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -204,7 +200,6 @@ public class MySqlDao implements InterfaceDao {
 
             psmt.executeUpdate();
 
-            System.out.println("Produto adicionado com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -265,6 +260,33 @@ public class MySqlDao implements InterfaceDao {
         }
 
         return produto;
+    }
+
+    @Override
+    public List<Produtos> getOrdenadosProduto() {
+       final String query = "SELECT * FROM produto ORDER BY Nome ASC;";
+       List<Produtos> p = new  ArrayList<>();
+       
+        try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+
+            Statement smt = c.createStatement();
+            ResultSet rs = smt.executeQuery(query);
+
+            while (rs.next()) {
+                String cod = rs.getString("Cod");
+                String nome = rs.getString("Nome");
+                double preco = rs.getDouble("Preco");
+                int estoque = rs.getInt("Estoque");
+                Produtos produto = new Produtos(cod, nome, preco, estoque);
+                p.add(produto);
+            }
+
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+       return p;
     }
         
    
@@ -357,28 +379,21 @@ public class MySqlDao implements InterfaceDao {
     public void deletPedido(int cod) {
         final String query = "DELETE FROM pedido WHERE N_Pedido= ?;";
 
-        if (!getPedido(cod).isEmpty()) {
 
-            try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
+        try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
             
-                PreparedStatement pstm = c.prepareStatement(query);
+            PreparedStatement pstm = c.prepareStatement(query);
 
-                pstm.setInt(1, cod);
-                pstm.executeUpdate();
+            pstm.setInt(1, cod);
+            pstm.executeUpdate();
 
-                System.err.println("Pedido deletado com sucesso");
 
-            } catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
-            }
-        } else {
-            System.out.println("Pedido não encontrado");
         }
 
-
     }
-    
-    
 
 
 }

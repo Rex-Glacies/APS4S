@@ -3,19 +3,16 @@ package Views.TelasAppsJpanel.telas;
 import Views.InterfaceViews.InterfaceCadPedidos;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
     private JTextField campoCliente, campoProduto, campoQuantidade, campoFuncionario;
-    private ArrayList<String> pedidos;
     private JButton btnEnviar;
     private JButton btnLimpar;
 
     public TelaSolicitarPedido() {
         setLayout(new BorderLayout(10, 10));
         setBackground(Color.WHITE);
-        pedidos = new ArrayList<>();
 
         JLabel titulo = new JLabel("Solicitar Novo Pedido", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 22));
@@ -50,7 +47,7 @@ public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
         JPanel botoes = new JPanel();
         botoes.setBackground(Color.WHITE);
         btnEnviar = new JButton("Enviar Pedido");
-        JButton btnLimpar = new JButton("Limpar");
+        btnLimpar = new JButton("Limpar");
         botoes.add(btnEnviar);
         botoes.add(btnLimpar);
 
@@ -88,10 +85,7 @@ public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
         limparCampos();
     }
 
-
-
-
-
+    
     private void limparCampos() {
         campoCliente.setText("");
         campoProduto.setText("");

@@ -1,6 +1,10 @@
 package Views.TelasAppsJpanel.telas;
 
+import Controller.ControllerCadCliente;
+import Controller.ControllerCadFunc;
+import Controller.ControllerCadProduto;
 import Controller.ControllerCriarPedido;
+import Controller.ControllerDeletPedido;
 import Controller.ControllerSelectCliente;
 import Controller.ControllerSelectFuncionario;
 import Controller.ControllerSelectPedido;
@@ -23,6 +27,11 @@ public class PainelMain extends JFrame {
     private ControllerSelectFuncionario controllerSFunc = new ControllerSelectFuncionario(new MySqlDao(), new TelaVerFuncionarios());
     private ControllerSelectCliente controllerSCliente = new ControllerSelectCliente(new MySqlDao(), new TelaVerClientes());
     private ControllerSelectProduto controllerSProduto = new ControllerSelectProduto(new MySqlDao(), new TelaVerProdutos());
+    private ControllerCadProduto controllerCProduto = new ControllerCadProduto(new MySqlDao(), new TelaCadastrarProduto());
+    private ControllerCadCliente controllerCCliente = new ControllerCadCliente(new MySqlDao(), new TelaCadastrarCliente());
+    private ControllerCadFunc controllerCFunc = new ControllerCadFunc(new MySqlDao(), new TelaCadastrarFuncionario());
+    private ControllerDeletPedido controllerDPedido = new ControllerDeletPedido(new MySqlDao(), new TelaDeletarPedido());
+
 
     public PainelMain() {
 
@@ -142,15 +151,15 @@ public class PainelMain extends JFrame {
 
         // Ações do menu usando classes anônimas em vez de lambdas
         cadCliente.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaCadastrarCliente());
+            trocarTela(controllerCCliente.getView());
         });
 
         cadFuncionario.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaCadastrarFuncionario());
+            trocarTela(controllerCFunc.getView());
         });
 
         cadProduto.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaCadastrarProduto());
+            trocarTela(controllerCProduto.getView());
         });
 
         verCliente.addActionListener((ActionEvent e) -> {
@@ -166,7 +175,7 @@ public class PainelMain extends JFrame {
         });
 
         delPedido.addActionListener((ActionEvent e) -> {
-            trocarTela(new TelaDeletarPedido());
+            trocarTela(controllerDPedido.getView());
         });
 
         solicitarPedido.addActionListener((ActionEvent e) -> {

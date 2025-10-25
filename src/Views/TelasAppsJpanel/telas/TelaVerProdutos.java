@@ -1,6 +1,6 @@
 package Views.TelasAppsJpanel.telas;
 
-import Views.InterfaceViews.InterfaceSelect;
+import Views.InterfaceViews.InterfaceSelectProduto;
 import entidades.Produtos;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -8,13 +8,16 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaVerProdutos extends JPanel implements InterfaceSelect<Produtos> {
+public class TelaVerProdutos extends JPanel implements InterfaceSelectProduto {
     private JTable tabela;
     private DefaultTableModel modelo;
     private JPanel areaDeBusca;
     private JLabel label;
     private JTextField campoBusca;
     private JButton atualizar;
+    private JLabel labelFiltro;
+    private JButton FiltroASC;
+
 
     public TelaVerProdutos() {
         setLayout(new BorderLayout(10, 10));
@@ -30,12 +33,16 @@ public class TelaVerProdutos extends JPanel implements InterfaceSelect<Produtos>
 
         label = new JLabel("Buscar:");
         campoBusca = new JTextField(15);
+        labelFiltro = new JLabel("Filtros:");
+        FiltroASC = new JButton("A → Z");
+
 
         // Adiciona os componentes ao painel de busca
         areaDeBusca.add(label);
         areaDeBusca.add(campoBusca);
-
-
+        areaDeBusca.add(labelFiltro);
+        areaDeBusca.add(FiltroASC);
+        
         add(areaDeBusca, BorderLayout.BEFORE_FIRST_LINE); 
 
         JPanel painelSuperior = new JPanel(new BorderLayout());
@@ -100,5 +107,10 @@ public class TelaVerProdutos extends JPanel implements InterfaceSelect<Produtos>
     @Override
     public void addListarTodos(ActionListener al) {
         atualizar.addActionListener(al);
+    }
+
+    @Override
+    public void addFiltrarOrdemASC(ActionListener al) {
+        FiltroASC.addActionListener(al);
     }
 }

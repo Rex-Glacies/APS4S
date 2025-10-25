@@ -68,8 +68,6 @@ public class TelaHistoricoPedidos extends JPanel implements InterfaceSelect<Pedi
         botoes.add(atualizar);
         add(botoes, BorderLayout.SOUTH);
 
-        // Dados simulados
-        //atualizar.addActionListener(e -> carregarPedidos());
     }
 
 

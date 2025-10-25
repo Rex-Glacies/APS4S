@@ -40,7 +40,6 @@ public class ControllerCriarPedido {
         
             } catch (NumberFormatException  ex) {
                 JOptionPane.showMessageDialog(null, "Campos numéricos inválidos ou vazios!","Erro",JOptionPane.ERROR_MESSAGE );
-                return;
             }
 
         

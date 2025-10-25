@@ -24,6 +24,7 @@ public interface  InterfaceDao {
     public void addProduto(Produtos p);
     public List<Produtos> getAllProdutos();
     public List<Produtos> getProduto(String key);
+    public List<Produtos> getOrdenadosProduto();
     
 
     //Pedidos
