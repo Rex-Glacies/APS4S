@@ -4,6 +4,9 @@ import entidades.Clientes;
 import entidades.Funcionarios;
 import entidades.Pedidos;
 import entidades.Produtos;
+
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public interface  InterfaceDao {
@@ -28,7 +31,7 @@ public interface  InterfaceDao {
     
 
     //Pedidos
-    public void addPedido(String codProd, int codFun, int codClient, int quant);
+    public void addPedido(String codProd, int codFun, int codClient, int quant) throws SQLIntegrityConstraintViolationException;
     public List<Pedidos> getAllPedidos();
     public List<Pedidos> getPedido(int key);
     public void deletPedido(int cod);

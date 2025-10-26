@@ -39,7 +39,7 @@ public class ControllerSelectPedido {
 		
 	}
 	
-	class AcaoTodos implements ActionListener {
+	public class AcaoTodos implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

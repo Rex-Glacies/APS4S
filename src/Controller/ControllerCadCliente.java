@@ -34,6 +34,7 @@ public class ControllerCadCliente {
             } else {
                 model.addCliente(nomeCliente.trim());
                 JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                view.limparCampos();
             }
         }
         

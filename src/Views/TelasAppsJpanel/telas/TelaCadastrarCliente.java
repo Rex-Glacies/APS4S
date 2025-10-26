@@ -52,8 +52,10 @@ public class TelaCadastrarCliente extends JPanel implements InterfaceCadFuncECli
     @Override
     public void addCadastro(ActionListener al) {
         btnEnviar.addActionListener(al);
+        campoNome.addActionListener(al);
     }
 
+    @Override
     public void limparCampos() {
         campoNome.setText("");
     }

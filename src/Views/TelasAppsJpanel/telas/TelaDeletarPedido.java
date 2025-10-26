@@ -1,6 +1,7 @@
 package Views.TelasAppsJpanel.telas;
 
 import Views.InterfaceViews.InterfaceDeletarPedido;
+import entidades.Clientes;
 import entidades.Pedidos;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ public class TelaDeletarPedido extends JPanel implements InterfaceDeletarPedido 
     private JTextField campoBusca;
     JButton botaoBuscar;
     JButton deletar;
+    JButton mostrar;
 
     public TelaDeletarPedido() {
         setLayout(new BorderLayout(10, 10));
@@ -71,6 +73,14 @@ public class TelaDeletarPedido extends JPanel implements InterfaceDeletarPedido 
         deletar.setForeground(Color.WHITE);
         botoes.add(deletar);
         add(botoes, BorderLayout.SOUTH);
+        
+        JPanel botoes1 = new JPanel();
+        botoes1.setBackground(Color.WHITE);
+        mostrar = new JButton("Mostrar Pedidos");
+        mostrar.setBackground(Color.WHITE);
+        mostrar.setForeground(Color.BLACK);
+        botoes.add(mostrar);
+        add(botoes, BorderLayout.SOUTH);
 
     }
 
@@ -117,5 +127,11 @@ public class TelaDeletarPedido extends JPanel implements InterfaceDeletarPedido 
         modelo.setRowCount(0);
         campoBusca.setText("");
     }
+
+	@Override
+	public void addListarTodos(ActionListener al) {
+		mostrar.addActionListener(al);
+		
+	}
     
 }

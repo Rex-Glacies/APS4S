@@ -72,7 +72,7 @@ public class TelaCadastrarProduto extends JPanel implements InterfaceCadProduto 
 
     @Override
     public double GetValorProd() {
-        return Double.parseDouble(campoPreco.getText());
+        return Double.parseDouble(campoPreco.getText().replace(",", "."));
     }
 
     @Override
@@ -83,8 +83,14 @@ public class TelaCadastrarProduto extends JPanel implements InterfaceCadProduto 
     @Override
     public void AddEnviarProduto(ActionListener al) {
         btnEnviar.addActionListener(al);
+        campoEstoque.addActionListener(al);
+        campoCod.addActionListener(al);
+        campoNome.addActionListener(al);
+        campoPreco.addActionListener(al);
     }
 
+    
+    @Override
     public void limparCampos() {
         campoCod.setText("");
         campoNome.setText("");

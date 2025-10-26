@@ -39,6 +39,7 @@ public class ControllerCadProduto {
                 } else {
                     model.addProduto(new Produtos(codProd, nomeProd, valorProd, estoque));
                     JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    view.limparCampos();
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Campos invalido ou vazios!","Erro",JOptionPane.ERROR_MESSAGE );

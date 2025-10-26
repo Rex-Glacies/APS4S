@@ -7,4 +7,5 @@ public interface  InterfaceCadFuncEClient {
     public String getNome();
 
     public void addCadastro(ActionListener al);
+    public void limparCampos();
 }

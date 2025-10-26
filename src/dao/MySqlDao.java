@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -295,7 +297,7 @@ public class MySqlDao implements InterfaceDao {
 
     //Parte do pedido
     @Override
-    public void addPedido(String codProd, int codFun, int codClient, int quant) {
+    public void addPedido(String codProd, int codFun, int codClient, int quant) throws SQLIntegrityConstraintViolationException {
         final String query = "INSERT INTO pedido(Cod_Prod_FK,Cod_Fun_FK,Cod_Clien_FK,Qtd_Prod) VALUES (?,?,?,?);";
 
         try (Connection c = DriverManager.getConnection(URL, USER,PASS)){
@@ -310,8 +312,11 @@ public class MySqlDao implements InterfaceDao {
             psmt.executeUpdate();
 
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+        	
+        	 System.err.println("Erro: " + e.getMessage());
+            throw new SQLIntegrityConstraintViolationException("Erro");
+            
         }
 
         
@@ -321,7 +326,7 @@ public class MySqlDao implements InterfaceDao {
     public List<Pedidos> getAllPedidos() {
         List<Pedidos> pedidos = new ArrayList<>();
 
-        final String query = "SELECT * FROM pedido";
+        final String query = "select * from pedido as pe inner join produto as pr where pe.Cod_Prod_FK = pr.Cod";
 
         try (Connection c = DriverManager.getConnection(URL, USER, PASS)) {
 
@@ -330,7 +335,7 @@ public class MySqlDao implements InterfaceDao {
 
             while (rs.next()) {
                 int n_pedido = rs.getInt("N_Pedido");
-                String cod_prod = rs.getString("Cod_Prod_FK");
+                String cod_prod = rs.getString("Nome");
                 int cod_fun = rs.getInt("Cod_Fun_FK");
                 int cod_clien = rs.getInt("Cod_Clien_FK");
                 int qntd_prod = rs.getInt("Qtd_Prod");

@@ -81,8 +81,11 @@ public class TelaSolicitarPedido extends JPanel implements InterfaceCadPedidos {
     
     @Override
     public void AddenviarPedido(ActionListener ln) {
-        btnEnviar.addActionListener(ln);  
-        limparCampos();
+        btnEnviar.addActionListener(ln);
+        campoCliente.addActionListener(ln);
+        campoProduto.addActionListener(ln);
+        campoQuantidade.addActionListener(ln);
+        campoFuncionario.addActionListener(ln);
     }
 
     

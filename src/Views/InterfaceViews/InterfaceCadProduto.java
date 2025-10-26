@@ -8,6 +8,7 @@ public interface InterfaceCadProduto {
     public String GetNomeProd();
     public double GetValorProd();
     public int GetEstoqueProd();
+    public void limparCampos();
 
     public void AddEnviarProduto(ActionListener al);
 }

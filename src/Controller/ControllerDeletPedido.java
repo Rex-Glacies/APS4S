@@ -2,12 +2,15 @@ package Controller;
 
 import Views.InterfaceViews.InterfaceDeletarPedido;
 import dao.InterfaceDao;
+import entidades.Clientes;
 import entidades.Pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import Controller.ControllerSelectPedido.AcaoTodos;
 
 public class ControllerDeletPedido {
     
@@ -23,6 +26,7 @@ public class ControllerDeletPedido {
 
         view.AddBuscapedido(new AcaoBusca());
         view.addDeletar(new AcaoDeletar());
+        view.addListarTodos(new AcaoTodos());
     }
 
     public JPanel getView() {
@@ -60,6 +64,16 @@ public class ControllerDeletPedido {
                 JOptionPane.showMessageDialog(null,"Pedido deletado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 view.LimparTabela();
             }
+        }
+
+    }
+    
+    class AcaoTodos implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            List<Pedidos> tpedidos = model.getAllPedidos();
+            view.mostrarTodos(tpedidos);
         }
 
     }

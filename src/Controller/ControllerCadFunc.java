@@ -34,6 +34,7 @@ public class ControllerCadFunc {
             } else {
                 model.addFuncionario(nomeFunc.trim());
                 JOptionPane.showMessageDialog(null,"Funcionario cadastrado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                view.limparCampos();
             }
             
         }

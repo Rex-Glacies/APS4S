@@ -49,7 +49,7 @@ public class TelaHistoricoPedidos extends JPanel implements InterfaceSelect<Pedi
         
 
         // Colunas
-        String[] colunas = {"Num.Pedido", "Cod.Fun", "Cod.Cliente", "Cod.Produto", "Quantidade"};
+        String[] colunas = {"Num.Pedido", "Cod.Fun", "Cod.Cliente", "Nome Produto", "Quantidade"};
         modelo = new DefaultTableModel(colunas, 0);
         tabela = new JTable(modelo) {
             @Override public boolean isCellEditable(int row, int column) {
